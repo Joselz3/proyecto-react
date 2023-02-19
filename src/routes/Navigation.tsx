@@ -1,5 +1,6 @@
 import {BrowserRouter, Navigate, NavLink} from 'react-router-dom'
 import {Routes,Route,Link} from 'react-router-dom'
+import { LazyPage1, LazyPage2,LazyPage3} from '../01-lazyload/pages'
 
 import logo from '../logo.svg'
 
@@ -12,21 +13,21 @@ export const Navigation = ()=>
                     <img src={logo}></img>
                     <ul>
                         <li>
-                            <NavLink to='/home' className={({isActive})=> isActive ? 'nav-active':''}>Home</NavLink>
+                            <NavLink to='/lazy1' className={({isActive})=> isActive ? 'nav-active':''}>Lazy1</NavLink>
                         </li>
                         <li>
-                            <NavLink to='/about' className={({isActive})=> isActive ? 'nav-active':''}>About</NavLink>
+                            <NavLink to='/lazy2' className={({isActive})=> isActive ? 'nav-active':''}>Lazy2</NavLink>
                         </li>
                         <li>
-                            <NavLink to='/users' className={({isActive})=> isActive ? 'nav-active':''}>Users</NavLink>
+                            <NavLink to='/lazy3' className={({isActive})=> isActive ? 'nav-active':''}>Lazy3</NavLink>
                         </li>
                     </ul>
                 </nav>
                 <Routes>
-                    <Route path='about' element ={<h1>About Page</h1>}></Route>
-                    <Route path='users' element ={<h1>Users</h1>}></Route>
-                    <Route path='home' element ={<h1>Homepage</h1>}></Route>
-                    <Route path='/*' element ={<Navigate to='/home' replace/>}></Route>
+                    <Route path='lazy1' element ={<LazyPage1/>}></Route>
+                    <Route path='lazy2' element ={<LazyPage2/>}></Route>
+                    <Route path='lazy3' element ={<LazyPage3/>}></Route>
+                    <Route path='/*' element ={<Navigate to='/lazy1' replace/>}></Route>
                 </Routes>
             </div>
         </BrowserRouter>
