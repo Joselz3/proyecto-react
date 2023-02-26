@@ -10,6 +10,7 @@ import '../styles/costum-styles.css'
 export const ShoppingPages = ()=>
 {
     const {onProductCountChange,shoppingCart} = useShoppingCart()
+    
     return(
         <div>
             <h1>Shopping Store</h1>
