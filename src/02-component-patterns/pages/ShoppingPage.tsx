@@ -1,14 +1,15 @@
+import { useState } from "react"
 import { ProductButtons, ProductCard, ProductImage, ProductTitle } from "../components"
+import { products } from "../data/products"
+import { useShoppingCart } from "../hooks/useShoppingCart"
+import { Product, ProductInCart } from "../interfaces/interfaces"
 import '../styles/costum-styles.css'
 
-const product={
-    id:'1',
-    title:'Coffe Mug - Card2',
-    img:'./coffee-mug.png'
-}
+
 
 export const ShoppingPages = ()=>
 {
+    const {onProductCountChange,shoppingCart} = useShoppingCart()
     return(
         <div>
             <h1>Shopping Store</h1>
@@ -20,42 +21,47 @@ export const ShoppingPages = ()=>
                     flexWrap:'wrap'
                 }}
             >
-
-                <ProductCard 
-                    product={product}
-                    className="bg-dark text-white"
-                >
-                    <ProductCard.Image style={{
-                        boxShadow:'10px 10px 10px rgba(0,0,0,0.2)'
-                    }} className='costum-image'/>
-                    <ProductCard.Title title="" className='text-white text-bold'/>
-                    <ProductCard.Buttons className='costum-buttons'/>
-                </ProductCard>
-                <ProductCard 
-                    product={product}
-                    className="bg-dark text-white"
-                    >
-                    <ProductImage className='costum-image'/>
-                    <ProductTitle className='text-white text-bold' title="Hola Mundo"/>
-                    <ProductButtons className='costum-buttons'/>
-                </ProductCard>
-                <ProductCard 
-                    product={product}
-                    style={{
-                        backgroundColor:'#70D1F8'
-                    }}
-                    >
-                    <ProductImage style={{
-                        boxShadow:'10px 10px 10px rgba(0,0,0,0.2)'
-                    }}/>
-                    <ProductTitle style={{
-                        fontWeight:'bold'
-                    }}/>
-                    <ProductButtons style={{
-                        display:'flex',
-                        justifyContent:'end'
-                    }}/>
-                </ProductCard>
+                {
+                    products.map(product=>(
+                    <ProductCard 
+                        key={product.id}
+                        product={product}
+                        className="bg-dark text-white"
+                        onChange={onProductCountChange}
+                        value={shoppingCart[product.id]?.count || 0}
+                        >
+                        <ProductImage className='costum-image'/>
+                        <ProductTitle className='text-white text-bold' title="Hola Mundo"/>
+                        <ProductButtons className='costum-buttons'/>
+                    </ProductCard>
+                    ))
+                }
+                
+            </div>
+            <div className="shopping-cart">
+                {
+                    Object.entries(shoppingCart).map(([key,product])=>(
+                        <ProductCard 
+                        key={key}
+                        product={product}
+                        className="bg-dark text-white"
+                        style={{width:'100px'}}
+                        value={product.count}
+                        onChange={onProductCountChange}
+                        >
+                        <ProductImage className='costum-image'/>
+                        <ProductButtons 
+                            className='costum-buttons'
+                            style={{
+                                display:'flex',
+                                justifyContent:'center'
+                            }}
+                        
+                        />
+                    </ProductCard>
+                    ))
+                   
+                }
             </div>
         </div>
     )
