@@ -1,69 +1,47 @@
 import { useState } from "react"
 import { ProductButtons, ProductCard, ProductImage, ProductTitle } from "../components"
 import { products } from "../data/products"
-import { useShoppingCart } from "../hooks/useShoppingCart"
 import { Product, ProductInCart } from "../interfaces/interfaces"
 import '../styles/costum-styles.css'
 
-
+const product = products[0]
 
 export const ShoppingPages = ()=>
 {
-    const {onProductCountChange,shoppingCart} = useShoppingCart()
-    
+  
+
     return(
         <div>
             <h1>Shopping Store</h1>
             <hr />
-            <div
-                style={{
-                    display:'flex',
-                    flexDirection:'row',
-                    flexWrap:'wrap'
+                <ProductCard 
+                    key={product.id}
+                    product={product}
+                    className="bg-dark text-white"
+                    initialValues={{
+                    count:4,
+                    maxCount:10
                 }}
-            >
-                {
-                    products.map(product=>(
-                    <ProductCard 
-                        key={product.id}
-                        product={product}
-                        className="bg-dark text-white"
-                        onChange={onProductCountChange}
-                        value={shoppingCart[product.id]?.count || 0}
-                        >
-                        <ProductImage className='costum-image'/>
-                        <ProductTitle className='text-white text-bold' title="Hola Mundo"/>
-                        <ProductButtons className='costum-buttons'/>
-                    </ProductCard>
-                    ))
-                }
+                >
+                    {
+                        ({
+                            reset,
+                            increaseBy,
+                            count
+                        })=>(
+                            <>
+                                <ProductImage className='costum-image'/>
+                                <ProductTitle className='text-white text-bold' title="Hola Mundo"/>
+                                <ProductButtons className='costum-buttons'/>
+                                <button onClick={reset}>Reset</button>
+                                <button onClick={()=>increaseBy(-2)}>-2</button>
+                                <button onClick={()=>increaseBy(+2)}>+2</button>
+                                <span>{count}</span>
+                            </>
+                        )
+                    }
                 
-            </div>
-            <div className="shopping-cart">
-                {
-                    Object.entries(shoppingCart).map(([key,product])=>(
-                        <ProductCard 
-                        key={key}
-                        product={product}
-                        className="bg-dark text-white"
-                        style={{width:'100px'}}
-                        value={product.count}
-                        onChange={onProductCountChange}
-                        >
-                        <ProductImage className='costum-image'/>
-                        <ProductButtons 
-                            className='costum-buttons'
-                            style={{
-                                display:'flex',
-                                justifyContent:'center'
-                            }}
-                        
-                        />
-                    </ProductCard>
-                    ))
-                   
-                }
-            </div>
+            </ProductCard>
         </div>
     )
 }
