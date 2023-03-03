@@ -69,8 +69,6 @@ export const FormikAbstractation = () => {
                   <option value="it-jr">IT Jr.</option>
                 </MySelect>
 
-              <ErrorMessage name="jobType" component="span"/>
-
               <MyCheckbox label="termns & conditions" name="terms" />
               <button type="submit">Submit</button>
             </Form>

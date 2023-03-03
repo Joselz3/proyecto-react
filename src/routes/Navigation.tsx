@@ -6,7 +6,9 @@ import
     FormikBasicPage,
     FormikComponents,
     FormikYupPage,
-    RegisterPage
+    RegisterPage,
+    RegisterFormikPage,
+    DynamicForm
 } from '../03-forms/pages'
 
 import logo from '../logo.svg'
@@ -23,6 +25,9 @@ export const Navigation = ()=>
                             <NavLink to='/register' className={({isActive})=> isActive ? 'nav-active':''}>Register Page</NavLink>
                         </li>
                         <li>
+                            <NavLink to='/formik-register' className={({isActive})=> isActive ? 'nav-active':''}>Register Formik Page</NavLink>
+                        </li>
+                        <li>
                             <NavLink to='/formik-basic' className={({isActive})=> isActive ? 'nav-active':''}>Formik Basic</NavLink>
                         </li>
                         <li>
@@ -34,14 +39,19 @@ export const Navigation = ()=>
                         <li>
                             <NavLink to='/formik-abstractation' className={({isActive})=> isActive ? 'nav-active':''}>Fromik Abstractation</NavLink>
                         </li>
+                        <li>
+                            <NavLink to='/dynamic-form' className={({isActive})=> isActive ? 'nav-active':''}>Dynamic Form</NavLink>
+                        </li>
                     </ul>
                 </nav>
                 <Routes>
                     <Route path='register' element ={<RegisterPage></RegisterPage>}></Route>
+                    <Route path='formik-register' element ={<RegisterFormikPage></RegisterFormikPage>}></Route>
                     <Route path='formik-basic' element ={<FormikBasicPage></FormikBasicPage>}></Route>
                     <Route path='formik-yup' element ={<FormikYupPage></FormikYupPage>}></Route>
                     <Route path='formik-components' element ={<FormikComponents></FormikComponents>}></Route>
                     <Route path='formik-abstractation' element ={<FormikAbstractation></FormikAbstractation>}></Route>
+                    <Route path='dynamic-form' element ={<DynamicForm></DynamicForm>}></Route>
                     <Route path='/*' element ={<Navigate to='/register' replace/>}></Route>
                 </Routes>
             </div>
